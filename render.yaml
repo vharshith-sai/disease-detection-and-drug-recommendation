@@ -2,7 +2,7 @@ services:
   - type: web
     name: disease-prediction
     env: python
-        plan: free
+    plan: free
     rootDir: healthcare
     buildCommand: "./build.sh"
     startCommand: "gunicorn healthcare.wsgi:application"
