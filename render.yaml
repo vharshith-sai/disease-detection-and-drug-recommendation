@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: disease-prediction
+    env: python
+    rootDir: healthcare
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn healthcare.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
