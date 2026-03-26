@@ -3,6 +3,9 @@
 ## Project Overview
 This Machine Learning and Django-based web application provides a comprehensive healthcare solution. It allows patients to input their symptoms to predict potential diseases and provides doctors with AI-powered drug recommendations tailored to the patient's predicted disease, age, and gender.
 
+## 🚀 Live Demo
+You can try the live application deployed on Render here: **[https://disease-prediction-demo.onrender.com](https://disease-prediction-demo.onrender.com)**
+
 ## Features
 - **Patient Dashboard**: Patients can register, create a profile, and predict diseases based on a wide selection of symptoms.
 - **Doctor Dashboard**: Doctors can review patient predictions, recommend drugs using AI, and schedule/approve appointments.
