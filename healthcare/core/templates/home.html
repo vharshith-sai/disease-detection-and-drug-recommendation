@@ -1,344 +1,232 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="icon" href="img/favicon.png" type="image/png" />
-    <title>HealthCare</title>
+{% block body %}
 
-    <link href="{% static 'core/css/bootstrap.css' %}" rel="stylesheet" />
-    <link href="{% static 'core/css/themify-icons.css' %}" rel="stylesheet" />
-    <link href="{% static 'core/css/flaticon.css' %}" rel="stylesheet" />
-    <link
-      href="{% static 'core/vendors/fontawesome/css/all.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/fontawesome.min.css' %}"
-      integrity="sha512-R+xPS2VPCAFvLRy+I4PgbwkWjw1z5B5gNDYgJN5LfzV4gGNeRQyVrY7Uk59rX+c8tzz63j8DeZPLqmXvBxj8pA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+<style>
+/* Page Specific Styles */
+.hero {
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
+    background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 50%);
+}
 
-    <link
-      href="{% static 'core/owl-carousel/owl.carousel.min.css' %}"
-      rel="stylesheet"
-    />
-    <link href="{% static 'core/nimate-css/animate.css' %}" rel="stylesheet" />
-    <link href="{% static 'core/css/style.css' %}" rel="stylesheet" />
-    <link href="{% static 'core/css/esponsive.css' %}" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="path/to/font-awesome/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <header class="header_area">
-      <div class="top_menu row m0"></div>
-      <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container">
-            <a class="navbar-brand logo_h" href="/"
-              ><img src="{% static 'core/img/logo.png' %}" alt="" style="width:150px"
-            /></a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(10, 102, 194, 0.15) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(40px);
+}
 
-            <div
-              class="collapse navbar-collapse offset"
-              id="navbarSupportedContent"
-            >
-              <ul class="nav navbar-nav menu_nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'doctors' %}">Doctors</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'reg' %}">Register</a>
-                </li>
+.hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 10;
+}
 
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-              </ul>
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+}
+
+.hero-visual {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.glass-box {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: float 6s ease-in-out infinite;
+}
+
+.glass-box-1 {
+    top: 10%;
+    right: 10%;
+    width: 250px;
+    animation-delay: 0s;
+}
+
+.glass-box-2 {
+    bottom: 10%;
+    left: 10%;
+    width: 280px;
+    animation-delay: -3s;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-hover) 100%);
+    box-shadow: var(--shadow-sm);
+    color: var(--primary);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 4rem;
+    margin-top: 4rem;
+}
+
+.metric-item h3 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+</style>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container grid grid-cols-2 items-center gap-8">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge badge-success">New</span> AI-Powered Diagnostics 2.0
             </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <section class="banner-area d-flex align-items-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-lg-6 col-xl-5">
-            <h1>
-              Healthcare for All
-              
+            <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;">
+                The Future of <span style="color: var(--primary);">Healthcare</span> is Here.
             </h1>
-            <p>
-              We believe that access to quality healthcare is a fundamental human right that should be available to all, regardless of their socioeconomic status, ethnicity, gender, or any other factors. Our healthcare center is committed to promoting health equity by providing affordable and accessible care
+            <p style="font-size: 1.125rem; font-weight: 300;">
+                Experience seamless disease prediction and personalized AI-driven drug recommendations. Precision medicine, designed for everyone.
             </p>
-            <a href="" class="main_btn">Make an Appointment</a>
-            <a href="" class="main_btn_light">View Department</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-area">
-      <div class="container">
-        <div class="row align-items-center">
-          <div
-            class="col-md-10 offset-md-1 col-lg-6 offset-lg-6 offset-xl-7 col-xl-5"
-          >
-            <div class="about-content">
-              <h4>
-                Expert Care, Personalized Attention
-              </h4>
-           
-              <p>
-                Our team of dedicated healthcare professionals is committed to providing you with the best possible care and support to help you achieve optimal health.
-              </p>
-
-              <a class="link_one" href="#">learn more</a>
+            <div class="flex gap-2 mt-4">
+                <a href="{% url 'reg' %}" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.05rem;">
+                    Patient Portal <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="{% url 'login' %}" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.05rem;">
+                    Doctor Access
+                </a>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-    <section class="team-area area-padding">
-      <div class="container">
-        <div class="area-heading row">
-          <div class="col-md-5 col-xl-4">
-            <h3>
-              Healthcheck<br />
-              Experience Doctors
-            </h3>
-          </div>
-          <div class="col-md-7 col-xl-8">
-            <p>
-              We strive to create a welcoming and inclusive environment where everyone feels respected, valued, and empowered to take control of their health. Whether you need preventive care, diagnostic services, or treatment for a chronic condition, we are here to help you every step of the way.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="card card-team">
-              <img
-                class="card-img rounded-0"
-                src="{% static 'core/img/team/1.jpg' %}"
-                alt=""
-              />
-              <div class="card-team__body text-center">
-                <h3><a href="#">Dr Saim</a></h3>
-                <p>Cardiologist</p>
-                <div class="team-footer d-flex justify-content-between">
-                  <a class="dn_btn" href=""
-                    ><i class="fa fa-phone" aria-hidden="true"></i
-                    >+922353652365</a
-                  >
-                  <ul class="card-team__social">
-                    <li>
-                      <a href="#"><i class="ti-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-twitter-alt"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-instagram"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-skype"></i></a>
-                    </li>
-                  </ul>
+        
+        <div class="hero-visual">
+            <!-- Abstract floating UI elements since we can't use real photos -->
+            <div class="glass-box glass-box-1 border">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-check-circle" style="color: var(--success); font-size: 1.25rem;"></i>
+                    <h4 style="margin:0; font-size:0.9rem;">Diagnostic Complete</h4>
                 </div>
-              </div>
+                <div style="height: 60px; background: linear-gradient(90deg, #E0E7FF, #F1F5F9); border-radius: 8px;"></div>
+                <p style="font-size: 0.75rem; margin:0;">AI Confidence: 98.4%</p>
             </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="card card-team">
-              <img
-                class="card-img rounded-0"
-                src="{% static 'core/img/team/2.jpg' %}"
-                alt=""
-              />
-              <div class="card-team__body text-center">
-                <h3><a href="#">Dr Moazam</a></h3>
-                <p>ENT Specialist</p>
-                <div class="team-footer d-flex justify-content-between">
-                  <a class="dn_btn" href=""
-                    ><i class="fa fa-phone"></i>+923652365</a
-                  >
-                  <ul class="card-team__social">
-                    <li>
-                      <a href="#"><i class="ti-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-twitter-alt"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-instagram"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-skype"></i></a>
-                    </li>
-                  </ul>
+            
+            <div class="glass-box glass-box-2 border">
+                <div class="flex items-center gap-1 mb-2">
+                    <i class="fa-solid fa-pills" style="color: var(--secondary); font-size: 1.25rem;"></i>
+                    <h4 style="margin:0; font-size:0.9rem;">Drug Recommended</h4>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="card card-team">
-              <img
-                class="card-img rounded-0"
-                src="{% static 'core/img/team/3.jpg' %}"
-                alt=""
-              />
-              <div class="card-team__body text-center">
-                <h3><a href="#">Dr Shahid</a></h3>
-                <p>Eye Specialist</p>
-                <div class="team-footer d-flex justify-content-between">
-                  <a class="dn_btn" href=""
-                    ><i class="fa fa-phone"></i>+92353652365</a
-                  >
-                  <ul class="card-team__social">
-                    <li>
-                      <a href="#"><i class="ti-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-twitter-alt"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-instagram"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="ti-skype"></i></a>
-                    </li>
-                  </ul>
+                <div style="display:flex; gap:0.5rem;">
+                    <span class="badge badge-primary">Amoxicillin</span>
+                    <span class="badge badge-warning">Paracetamol</span>
                 </div>
-              </div>
+                <p style="font-size: 0.75rem; margin-top:0.5rem; margin-bottom:0;">Based on patient profile & symptoms.</p>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <footer class="footer-area area-padding-top">
-      <div class="container">
-        <div class="row">
-       
-          <div class="col-lg-4 col-sm-6 single-footer-widget">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">About Us</a></li>
-              
-
-              <li><a href="#">Doctors</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-4 col-sm-6 single-footer-widget">
-            <h4>Features</h4>
-            <ul>
-              <li><a href="#">Disease Detection</a></li>
-              <li><a href="#">Drug Recommendation</a></li>
-              <li><a href="#">Take Appointment</a></li>
-              <li><a href="#">Manage Appointment</a></li>
-             
-            </ul>
-          </div>
-      
-          <div class="col-lg-4 col-md-6 single-footer-widget">
-            <h4>Newsletter</h4>
-            <p>You can trust us. we only send promo offers,</p>
-            <div class="form-wrap" id="mc_embed_signup">
-              <form
-                target="_blank"
-                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                method="get"
-                class="form-inline"
-              >
-                <input
-                  class="form-control"
-                  name="EMAIL"
-                  placeholder="Your Email Address"
-                  onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = 'Your Email Address'"
-                  required=""
-                  type="email"
-                />
-                <button class="click-btn btn btn-default">
-                  <i class="ti-arrow-right"></i>
-                </button>
-                <div style="position: absolute; left: -5000px">
-                  <input
-                    name="b_36c4fd991d266f23781ded980_aefe40901a"
-                    tabindex="-1"
-                    value=""
-                    type="text"
-                  />
+<!-- Features Section -->
+<section style="padding: 8rem 0; background: var(--surface);">
+    <div class="container">
+        <div class="text-center" style="max-width: 600px; margin: 0 auto 4rem;">
+            <h2>Premium Healthcare Analytics</h2>
+            <p>Our intelligent system connects practitioners and patients instantly, analyzing complex symptoms to deliver immediate insights.</p>
+        </div>
+        
+        <div class="grid grid-cols-3 gap-4">
+            <div class="card">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-microscope"></i>
                 </div>
-
-                <div class="info"></div>
-              </form>
+                <h4>Symptom Analysis</h4>
+                <p>Input your symptoms to our machine learning model which maps over 130 exact indicators to 40+ potential diseases in milliseconds.</p>
             </div>
-          </div>
-        </div>
-        <div class="row footer-bottom d-flex justify-content-between">
-          <p class="col-lg-8 col-sm-12 footer-text m-0">
-            Copyright &copy;
-            <script>
-              document.write(new Date().getFullYear());
-            </script>
-            All rights reserved
-          </p>
-          <div class="col-lg-4 col-sm-12 footer-social">
-            <a href=""><i class="fab fa-facebook-f"></i></a>
-            <a href=""><i class="fab fa-twitter"></i></a>
-            <a href=""><i class="fab fa-dribbble"></i></a>
-            <a href=""><i class="fab fa-linkedin"></i></a>
-          </div>
-        </div>
-      </div>
-    </footer>
+            
+            <div class="card">
+                <div class="feature-icon" style="color: var(--secondary);">
+                    <i class="fa-solid fa-file-prescription"></i>
+                </div>
+                <h4>AI Drug Prescription</h4>
+                <p>Our secure system recommends optimal medications based on diagnosed diseases, filtered by patient age and specific medical profiles.</p>
+            </div>
 
-    <script src="{% static 'core/j/jquery-2.2.4.min.' %}"></script>
-    <script src="{% static 'core/j/popper.' %}"></script>
-    <script src="{% static 'core/j/bootstrap.min.' %}"></script>
-    <script src="{% static 'core/j/stellar.' %}"></script>
-    <script src="{% static 'vendors/owl-carousel/owl.carousel.min.' %}"></script>
-    <script src="{% static 'core/j/jquery.ajaxchimp.min.' %}"></script>
-    <script src="{% static 'core/j/waypoints.min.' %}"></script>
-    <script src="{% static 'core/j/mail-script.' %}"></script>
-    <script src="{% static 'core/j/contact.' %}"></script>
-    <script src="{% static 'core/j/jquery.form.' %}"></script>
-    <script src="{% static 'core/j/jquery.validate.min.' %}"></script>
-    <script src="{% static 'core/j/mail-script.' %}"></script>
-    <script src="{% static 'core/j/theme.' %}"></script>
-  </body>
-</html>
+            <div class="card">
+                <div class="feature-icon" style="color: var(--success);">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <h4>Smart Appointments</h4>
+                <p>Seamlessly request, manage, and approve clinical appointments digitally without phone calls or waiting rooms.</p>
+            </div>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <h3>40+</h3>
+                <p>Diseases Detectable</p>
+            </div>
+            <div class="metric-item">
+                <h3>130+</h3>
+                <p>Tracked Symptoms</p>
+            </div>
+            <div class="metric-item">
+                <h3>99%</h3>
+                <p>System Uptime</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section style="padding: 8rem 0; background: var(--background);">
+    <div class="container text-center">
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto; background: white;">
+            <h2>Ready to transform your practice?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Join thousands of modern medical professionals and patients using HealthTech.</p>
+            <a href="{% url 'reg' %}" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem;">Create Free Account</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
